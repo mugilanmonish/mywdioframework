@@ -1,0 +1,5 @@
+node_modules/
+allure-results/
+Web_Execution_Report/
+MWeb_Execution_Report/
+logs/

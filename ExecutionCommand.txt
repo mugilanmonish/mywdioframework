@@ -1,0 +1,5 @@
+For Mweb Android Chrome
+# npx cross-env BROWSERSTACK=true BROWSER_NAME='chrome' DEVICE_NAME='Samsung Galaxy S24 Ultra' ENV=prod wdio run .\wdio.mweb.conf.js --spec .\test\specs\MobileWeb\redbus.spec.js
+
+For Mweb Apple Safari
+#  npx cross-env BROWSERSTACK=true BROWSER_NAME='safari' DEVICE_NAME='iPhone 15 Pro Max' ENV=prod wdio run .\wdio.mweb.conf.js --spec .\test\specs\MobileWeb\redbus.spec.js
