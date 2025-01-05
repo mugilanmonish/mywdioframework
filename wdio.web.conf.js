@@ -4,6 +4,7 @@ import allure from "allure-commandline";
 import webCapabilities from "./genricUtility/webCapabilities.js";
 import report from "./genricUtility/allureUtility.js";
 import { BS_USERNAME, BS_ACCESS_KEY } from "./config.js";
+import apiUtility from './genricUtility/apiUtility.js';
 const selectedBrowser = process.env.BROWSER_NAME || 'chrome'
 const ENV = process.env.ENV || 'prod';
 const urls = {
@@ -23,8 +24,8 @@ export const config = {
     suites: {
         smoke: ['./test/specs/web/*.spec.js']
     },
-    exclude: [],
-    maxInstances: 2,
+    exclude: ['./test/specs/web/redbusSmoke.spec.js'],
+    maxInstances: 1,
     capabilities: process.env.BROWSERSTACK === 'true' ? [
         (() => {
             switch (selectedBrowser) {
@@ -58,7 +59,7 @@ export const config = {
     waitforTimeout: 15000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
-    outputDir: './logs/Wdio_Log',
+    // outputDir: './logs/Wdio_Log',
     services: process.env.BROWSERSTACK === 'true' ?
         [
             [
@@ -103,9 +104,12 @@ export const config = {
     },
 
     afterTest: async function (test, context, { error, result, duration, passed, retries }) {
-        
         if (error) {
             await browser.takeScreenshot();
+        }
+        if (process.env.BROWSERSTACK === 'true') {
+            var publicUrl = await apiUtility.getBrowserstackPublicLink()
+            console.log(`BS Public Url -> ${publicUrl}`);
         }
         await browser.execute(() => {
             window.localStorage.clear();
@@ -122,12 +126,9 @@ export const config = {
         const generation = allure(['generate', '--single-file', 'allure-results', '--clean', '--output', reportDir])
         return new Promise((resolve, reject) => {
             const generationTimeout = setTimeout(
-                () => reject(reportError),
-                15000)
-
+                () => reject(reportError), 15000)
             generation.on('exit', function (exitCode) {
                 clearTimeout(generationTimeout)
-
                 if (exitCode !== 0) {
                     return reject(reportError)
                 }

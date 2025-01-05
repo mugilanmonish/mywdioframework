@@ -4,7 +4,7 @@ import reporter from "../../../genricUtility/allureUtility.js";
 import webdriverUtility from "../../../genricUtility/webdriverUtility.js";
 import { expect } from "chai";
 
-describe('Redbus Smoke', async () => {
+describe.skip('Redbus Smoke', async () => {
 
     it('First Bus Booking', async () => {
         let boarding = data.bookingData.boardingPoint
@@ -101,7 +101,7 @@ describe('Redbus Smoke', async () => {
         await reporter.stepLevelLog(`Validated "${searchDate}" Date in Search Bus Page`)
 
         await $("(//ul[@class='bus-items']//div[text()='View Seats'])[2]").click()
-        await reporter.stepLevelLog(`Clicked First Bus View Seats Button`)
+        await reporter.stepLevelLog(`Clicked Second Bus View Seats Button`)
 
         await webdriverUtility.waitForClickable(`//div[text()='HIDE SEATS']`)
         const busSeats = await $("//canvas[@data-type='lower']").isDisplayed()

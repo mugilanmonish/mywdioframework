@@ -3,3 +3,34 @@ For Mweb Android Chrome
 
 For Mweb Apple Safari
 #  npx cross-env BROWSERSTACK=true BROWSER_NAME='safari' DEVICE_NAME='iPhone 15 Pro Max' ENV=prod wdio run .\wdio.mweb.conf.js --spec .\test\specs\MobileWeb\redbus.spec.js
+
+For Web Windows Chrome
+#  npx cross-env BROWSERSTACK=false BROWSER_NAME='chrome' ENV=prod wdio run .\wdio.web.conf.js --suite smoke
+
+Command for Build Docker Image
+#  docker build -t wdio-framework .
+
+Docker Image Run Command
+#  docker run -it --rm wdio-framework
+
+Docker Image Run Command (without rm)
+#  docker run -it <container-name> (e.g docker run -it wdio-framework)
+
+Docker Image Run Command to Run partiular test file 
+#  docker run -it wdio-framework npx cross-env BROWSERSTACK=true BROWSER_NAME='chrome' DEVICE_NAME="Samsung Galaxy S24 Ultra" ENV='prod' wdio run ./wdio.mweb.conf.js --spec ./test/specs/MobileWeb/redbus.spec.js
+
+Copy the allure report from Container to local machine 
+After running the container follow the steps to copy allure report to local machine
+
+#  docker stop <container-name> (e.g docker stop practical_bohr)
+
+#  docker rm <container-name> (e.g docker rm epic_jemison)
+
+#  docker run --name <container-name> -v /run/desktop/mnt/host/<local-path>:<container-path> -d <container-name> 
+(e.g docker run --name practical_bohr -v /run/desktop/mnt/host/c/Users/Mugilan/Desktop/Docket-Execution-Report:/usr/src/app/Web_Execution_Report -d wdio-framework)
+
+#  docker exec -it <container-id> bash (e.g docker exec -it e5d58ee304aa8812037526724f2c0bad957c3d50b0567335c821ea824d9f8482 bash)
+
+#  docker cp <container-id>:<container-path> <local-path> 
+(e.g docker cp d76f1c034873:/usr/src/app/Web_Execution_Report/Report_5-1-2025_7-37 C:/Users/Mugilan/Desktop/Docket-Execution-Report/Report_5-1-2025_7-37)
+
