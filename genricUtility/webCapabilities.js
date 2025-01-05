@@ -6,7 +6,12 @@ const chromeLocal = {
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
     'goog:chromeOptions': {
         // mobileEmulation: { deviceName: 'Pixel 2' },
-        args: ['--disable-blink-features=AutomationControlled'],
+        args: [
+            '--headless',               // Run in headless mode
+            '--no-sandbox',             // Disable sandboxing (required in Docker)
+            '--disable-dev-shm-usage',  // Overcomes issue with /dev/shm in Docker
+            '--disable-blink-features=AutomationControlled'  // Avoid detection of WebDriver
+        ],
         prefs: {
             'profile.default_content_setting_values.notifications': 2, // 2 means block notifications
         }
@@ -44,10 +49,10 @@ const chromeBrowserstack = {
 
 const firefoxBrowserstack = {
     browserName: 'firefox',
-    browserVersion : "latest",
+    browserVersion: "latest",
     'bstack:options': {
         os: process.env.BROWSER_VERSION || 'Windows',
-        osVersion:process.env.OS_VERSION || '11',
+        osVersion: process.env.OS_VERSION || '11',
         userName: BS_USERNAME,
         accessKey: BS_ACCESS_KEY
     },

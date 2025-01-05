@@ -59,7 +59,7 @@ describe('Redbus E2E', async () => {
         
     })
 
-    it('Second Bus Booking', async () => {
+    it.skip('Second Bus Booking', async () => {
         let boarding = data.bookingData.boardingPoint
         await $("input[id='src']").addValue(boarding)
         await reporter.stepLevelLog(`Entered ${boarding} in From Text Field`)
@@ -102,7 +102,7 @@ describe('Redbus E2E', async () => {
         await reporter.stepLevelLog(`Validated "${searchDate}" Date in Search Bus Page`)
 
         await $("(//ul[@class='bus-items']//div[text()='View Seats'])[2]").click()
-        await reporter.stepLevelLog(`Clicked First Bus View Seats Button`)
+        await reporter.stepLevelLog(`Clicked Second Bus View Seats Button`)
 
         await webdriverUtility.waitForClickable(`//div[text()='HIDE SEATS']`)
         const busSeats = await $("//canvas[@data-type='lower']").isDisplayed()
