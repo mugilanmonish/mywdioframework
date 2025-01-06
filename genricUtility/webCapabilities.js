@@ -6,12 +6,12 @@ const chromeLocal = {
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
     'goog:chromeOptions': {
         // mobileEmulation: { deviceName: 'Pixel 2' },
-        args: [
-            '--headless',               // Run in headless mode
-            '--no-sandbox',             // Disable sandboxing (required in Docker)
-            '--disable-dev-shm-usage',  // Overcomes issue with /dev/shm in Docker
-            '--disable-blink-features=AutomationControlled'  // Avoid detection of WebDriver
-        ],
+        // args: [
+        //     '--headless',               // Run in headless mode
+        //     '--no-sandbox',             // Disable sandboxing (required in Docker)
+        //     '--disable-dev-shm-usage',  // Overcomes issue with /dev/shm in Docker
+        //     '--disable-blink-features=AutomationControlled'  // Avoid detection of WebDriver
+        // ],
         prefs: {
             'profile.default_content_setting_values.notifications': 2, // 2 means block notifications
         }

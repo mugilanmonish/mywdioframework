@@ -33,4 +33,3 @@ After running the container follow the steps to copy allure report to local mach
 
 #  docker cp <container-id>:<container-path> <local-path> 
 (e.g docker cp d76f1c034873:/usr/src/app/Web_Execution_Report/Report_5-1-2025_7-37 C:/Users/Mugilan/Desktop/Docket-Execution-Report/Report_5-1-2025_7-37)
-
