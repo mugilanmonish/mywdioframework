@@ -48,4 +48,4 @@ COPY . .
 EXPOSE 4444
 
 # Default command to run your WDIO tests
-CMD ["npx", "cross-env", "BROWSERSTACK=true", "BROWSER_NAME=chrome", "ENV=prod", "wdio", "run", "./wdio.web.conf.js", "--suite", "smoke"]
+CMD ["npx", "cross-env", "BROWSERSTACK=false", "BROWSER_NAME=chrome", "ENV=prod", "wdio", "run", "./wdio.web.conf.js", "--suite", "smoke"]
