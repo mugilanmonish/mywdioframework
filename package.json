@@ -22,6 +22,5 @@
     "appium": "^2.12.1",
     "dotenv": "^16.4.7"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }

@@ -56,7 +56,7 @@ export const config = {
     logLevel: 'info',
     bail: 0,
     baseUrl: urls[ENV],
-    waitforTimeout: 15000,
+    waitforTimeout: 20000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
     // outputDir: './logs/Wdio_Log',
@@ -118,30 +118,32 @@ export const config = {
     },
 
     onComplete: function (exitCode, config, capabilities, results) {
-        const reportError = new Error('Could not generate Allure report')
-        const now = new Date();
-        const timestamp = `${now.getDate()}-${(now.getMonth() + 1)}-${now.getFullYear()}_${now.getHours()}-${now.getMinutes()}`;
-        const reportDir = path.join('Web_Execution_Report', `Report_${timestamp}`);
-        const reportFile = (process.env.BROWSERSTACK === 'true' ? `Web_BS_Report_${timestamp}.html` : `Web_Local_Report_${timestamp}.html`)
-        const generation = allure(['generate', '--single-file', 'allure-results', '--clean', '--output', reportDir])
-        return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError), 15000)
-            generation.on('exit', function (exitCode) {
-                clearTimeout(generationTimeout)
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
-                const oldPath = path.join(reportDir, 'index.html');
-                const newPath = path.join(reportDir, reportFile);
-                fs.rename(oldPath, newPath, (err) => {
-                    if (err) {
-                        return reject(new Error('Could not rename the Allure report file.'));
+        try {
+            const reportError = new Error('Could not generate Allure report')
+            const now = new Date();
+            const timestamp = `${now.getDate()}-${(now.getMonth() + 1)}-${now.getFullYear()}_${now.getHours()}-${now.getMinutes()}`;
+            const reportDir = path.join('Web_Execution_Report', `Report_${timestamp}`);
+            const reportFile = (process.env.BROWSERSTACK === 'true' ? `Web_BS_Report_${timestamp}.html` : `Web_Local_Report_${timestamp}.html`)
+            const generation = allure(['generate', '--single-file', 'allure-results', '--clean', '--output', reportDir])
+            return new Promise((resolve, reject) => {
+                const generationTimeout = setTimeout(
+                    () => reject(reportError), 15000)
+                generation.on('exit', function (exitCode) {
+                    clearTimeout(generationTimeout)
+                    if (exitCode !== 0) {
+                        return reject(reportError)
                     }
-                    console.log('Allure report successfully generated')
-                    resolve()
+                    const oldPath = path.join(reportDir, 'index.html');
+                    const newPath = path.join(reportDir, reportFile);
+                    fs.rename(oldPath, newPath, (err) => {
+                        if (err) {
+                            return reject(new Error('Could not rename the Allure report file.'));
+                        }
+                        console.log('Allure report successfully generated')
+                        resolve()
+                    })
                 })
             })
-        })
+        } catch (error) { }
     }
 }

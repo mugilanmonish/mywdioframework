@@ -27,6 +27,12 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Firefox dependencies
+RUN apt-get update && apt-get install -y \
+    firefox-esr \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install Java 17 (OpenJDK)
 RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
 
@@ -48,4 +54,4 @@ COPY . .
 EXPOSE 4444
 
 # Default command to run your WDIO tests
-CMD ["npx", "cross-env", "BROWSERSTACK=true", "BROWSER_NAME=chrome", "ENV=prod", "wdio", "run", "./wdio.web.conf.js", "--suite", "smoke"]
+CMD ["npx", "cross-env", "BROWSERSTACK=false", "BROWSER_NAME=firefox", "DOCKER=true" ,"ENV=prod", "wdio", "run", "./wdio.web.conf.js", "--suite", "smoke"]

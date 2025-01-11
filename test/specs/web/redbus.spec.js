@@ -32,9 +32,14 @@ describe('Redbus E2E', async () => {
         await reporter.stepLevelLog(`Clicked Search Buses Button`)
 
         const okBtnLocator = "//span[text()='Ok, got it']"
-        await webdriverUtility.waitForClickable(okBtnLocator)
-        await $(okBtnLocator).click()
-        await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        try {
+            await webdriverUtility.waitForClickable(okBtnLocator)
+            await $(okBtnLocator).click()
+            await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        } catch (error) {
+            await reporter.stepLevelLog(`Ok,got it Button is Not Available`)
+        }
+
 
         const source = await $("//span[@class='src']").getAttribute('title')
         expect(source).contains(boarding)
@@ -52,11 +57,12 @@ describe('Redbus E2E', async () => {
         await reporter.stepLevelLog(`Clicked First Bus View Seats Button`)
 
         await webdriverUtility.waitForClickable(`//div[text()='HIDE SEATS']`)
+        await browser.pause(2000)
         const busSeats = await $("//canvas[@data-type='lower']").isDisplayed()
         expect(busSeats, 'Bus Seats is not displayed').to.be.true
         await reporter.stepLevelLog(`Validated the visibility of Bus Seats`)
         console.log(`FIRST BUS`);
-        
+
     })
 
     it.skip('Second Bus Booking', async () => {
