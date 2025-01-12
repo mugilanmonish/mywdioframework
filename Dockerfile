@@ -40,6 +40,9 @@ RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/l
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
+# Install allure globally in docker container
+RUN npm install -g allure-commandline
+
 # Set working directory in the container
 WORKDIR /usr/src/app
 
