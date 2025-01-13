@@ -19,7 +19,7 @@ const chromeLocal = {
 }
 
 const firefoxLocal = {
-    maxInstances: 2,
+    maxInstances: 1,
     browserName: 'firefox',
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
     'moz:firefoxOptions': process.env.DOCKER === 'true' ? {
