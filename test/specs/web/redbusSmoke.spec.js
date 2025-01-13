@@ -4,9 +4,10 @@ import reporter from "../../../genricUtility/allureUtility.js";
 import webdriverUtility from "../../../genricUtility/webdriverUtility.js";
 import { expect } from "chai";
 
-describe.skip('Redbus Smoke', async () => {
+describe('Redbus Smoke', async () => {
 
     it('First Bus Booking', async () => {
+        await reporter.stepLevelLog(`${javascriptUtility.getTime()}`)
         let boarding = data.bookingData.boardingPoint
         await $("input[id='src']").addValue(boarding)
         await reporter.stepLevelLog(`Entered ${boarding} in From Text Field`)
@@ -32,9 +33,13 @@ describe.skip('Redbus Smoke', async () => {
         await reporter.stepLevelLog(`Clicked Search Buses Button`)
 
         const okBtnLocator = "//span[text()='Ok, got it']"
-        await webdriverUtility.waitForClickable(okBtnLocator)
-        await $(okBtnLocator).click()
-        await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        try {
+            await webdriverUtility.waitForClickable(okBtnLocator)
+            await $(okBtnLocator).click()
+            await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        } catch (error) {
+            await reporter.stepLevelLog(`Ok,got it Button is Not Available`)
+        }
 
         const source = await $("//span[@class='src']").getAttribute('title')
         expect(source).contains(boarding)
@@ -52,11 +57,11 @@ describe.skip('Redbus Smoke', async () => {
         await reporter.stepLevelLog(`Clicked First Bus View Seats Button`)
 
         await webdriverUtility.waitForClickable(`//div[text()='HIDE SEATS']`)
+        await browser.pause(2000)
         const busSeats = await $("//canvas[@data-type='lower']").isDisplayed()
         expect(busSeats, 'Bus Seats is not displayed').to.be.true
         await reporter.stepLevelLog(`Validated the visibility of Bus Seats`)
         console.log(`FIRST BUS`);
-
     })
 
     it('Second Bus Booking', async () => {
@@ -78,15 +83,20 @@ describe.skip('Redbus Smoke', async () => {
         await webdriverUtility.waitForClickable(`(//span[text()='${todayDate}'])[1]`)
         await date.click()
         await reporter.stepLevelLog(`Clicked Today's Date ${todayDate} in the Calendar`)
+
         const searchBtn = await $("button[id='search_button']")
         await searchBtn.scrollIntoView({ block: 'center', inline: 'center' })
         await searchBtn.click()
         await reporter.stepLevelLog(`Clicked Search Buses Button`)
 
         const okBtnLocator = "//span[text()='Ok, got it']"
-        await webdriverUtility.waitForClickable(okBtnLocator)
-        await $(okBtnLocator).click()
-        await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        try {
+            await webdriverUtility.waitForClickable(okBtnLocator)
+            await $(okBtnLocator).click()
+            await reporter.stepLevelLog(`Clicked Ok,got it Button`)
+        } catch (error) {
+            await reporter.stepLevelLog(`Ok,got it Button is Not Available`)
+        }
 
         const source = await $("//span[@class='src']").getAttribute('title')
         expect(source).contains(boarding)
@@ -104,6 +114,7 @@ describe.skip('Redbus Smoke', async () => {
         await reporter.stepLevelLog(`Clicked Second Bus View Seats Button`)
 
         await webdriverUtility.waitForClickable(`//div[text()='HIDE SEATS']`)
+        await browser.pause(2000)
         const busSeats = await $("//canvas[@data-type='lower']").isDisplayed()
         expect(busSeats, 'Bus Seats is not displayed').to.be.true
         await reporter.stepLevelLog(`Validated the visibility of Bus Seats`)
