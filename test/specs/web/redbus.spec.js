@@ -7,6 +7,7 @@ import { expect } from "chai";
 describe('Redbus E2E', async () => {
 
     it('First Bus Booking', async () => {
+        await reporter.stepLevelLog(`${javascriptUtility.getTime()}`)
         let boarding = data.bookingData.boardingPoint
         await $("input[id='src']").addValue(boarding)
         await reporter.stepLevelLog(`Entered ${boarding} in From Text Field`)
