@@ -53,7 +53,7 @@ export const config = {
             }
         })(),
     ],
-    logLevel: 'error',
+    logLevel: 'debug',
     bail: 0,
     baseUrl: urls[ENV],
     waitforTimeout: 20000,
