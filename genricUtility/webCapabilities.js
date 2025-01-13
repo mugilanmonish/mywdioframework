@@ -1,7 +1,6 @@
 import { BS_USERNAME, BS_ACCESS_KEY } from './../config.js';
 
 const chromeLocal = {
-    maxInstances: 2,
     browserName: 'chrome',
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
     'goog:chromeOptions': {
@@ -19,7 +18,6 @@ const chromeLocal = {
 }
 
 const firefoxLocal = {
-    maxInstances: 1,
     browserName: 'firefox',
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
     'moz:firefoxOptions': process.env.DOCKER === 'true' ? {
@@ -28,7 +26,6 @@ const firefoxLocal = {
 }
 
 const safariLocal = {
-    maxInstances: 1,
     browserName: 'safari',
     browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest'
 }

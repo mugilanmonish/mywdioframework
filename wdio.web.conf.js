@@ -25,7 +25,7 @@ export const config = {
         smoke: ['./test/specs/web/*.spec.js']
     },
     exclude: [],
-    maxInstances: 2,
+    maxInstances: 1,
     capabilities: process.env.BROWSERSTACK === 'true' ? [
         (() => {
             switch (selectedBrowser) {
