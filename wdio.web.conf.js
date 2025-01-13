@@ -24,7 +24,7 @@ export const config = {
     suites: {
         smoke: ['./test/specs/web/*.spec.js']
     },
-    exclude: ['./test/specs/web/redbusSmoke.spec.js'],
+    exclude: [],
     maxInstances: 2,
     capabilities: process.env.BROWSERSTACK === 'true' ? [
         (() => {
