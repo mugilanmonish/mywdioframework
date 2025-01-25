@@ -3,7 +3,7 @@ import webdriverUtility from "../../genricUtility/webdriverUtility.js";
 import reporter from "../../genricUtility/allureUtility.js";
 import { assert, expect } from "chai";
 
-class SearchBusPage {
+class HomePage {
 
     get boardingTxtFld() { return $("input[id='src']") }
     get destinationTxtFld() { return $("input[id='dest']") }
@@ -46,4 +46,4 @@ class SearchBusPage {
         })
     }
 }
-export default new SearchBusPage();
+export default new HomePage();

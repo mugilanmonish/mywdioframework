@@ -1,6 +1,5 @@
 import javascriptUtility from "../../../genricUtility/javascriptUtility.js";
-import reporter from "../../../genricUtility/allureUtility.js";
-import searchBusPage from "../../pageobjects/searchBus.page.js";
+import homePage from "../../pageobjects/home.page.js";
 import selectBusPage from "../../pageobjects/selectBus.page.js";
 import data from "../../testData/allDataImport.js";
 
@@ -10,7 +9,7 @@ describe('Live Tracking Functionality', async () => {
     const todayDate = javascriptUtility.getDate()
     it('Validating color, bus count, Live Tracking label in Buses', async () => {
         /* Searching Busses */
-        await searchBusPage.enterBoardingAndDestination(boarding, destination, todayDate)
+        await homePage.enterBoardingAndDestination(boarding, destination, todayDate)
 
         /* Handling Popup */
         await selectBusPage.handlingOkgotItPopup()
@@ -21,7 +20,7 @@ describe('Live Tracking Functionality', async () => {
 
     it('Reset button, Live Traking label not present in atleast one Bus', async () => {
         /* Searching Busses */
-        await searchBusPage.enterBoardingAndDestination(boarding, destination, todayDate)
+        await homePage.enterBoardingAndDestination(boarding, destination, todayDate)
 
         /* Handling Popup */
         await selectBusPage.handlingOkgotItPopup()
