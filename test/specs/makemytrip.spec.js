@@ -28,6 +28,5 @@ describe('Make my trip', async () => {
         console.log(`Lower Price ${lowerPrice} --> ${typeof lowerPrice}`);
         const lowerPriceDate = await $(`//div[text()='November 2024']/ancestor::div[@class='DayPicker-Month']//p[text()='${lowerPrice}']`)
         lowerPriceDate.click()
-        await browser.pause(10000)
     })
 })

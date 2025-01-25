@@ -54,7 +54,7 @@ RUN npm install
 COPY . .
 
 # Expose ports (for Selenium/Grid or Allure if needed)
-EXPOSE 4444
+# EXPOSE 4444
 
 # Default command to run your WDIO tests
 # CMD ["npx", "cross-env", "BROWSERSTACK=false", "BROWSER_NAME=firefox", "DOCKER=true" ,"ENV=prod", "wdio", "run", "./wdio.web.conf.js", "--suite", "smoke"]

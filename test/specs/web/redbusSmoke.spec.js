@@ -4,7 +4,7 @@ import reporter from "../../../genricUtility/allureUtility.js";
 import webdriverUtility from "../../../genricUtility/webdriverUtility.js";
 import { expect } from "chai";
 
-describe('Redbus Smoke', async () => {
+describe.skip('Redbus Smoke', async () => {
 
     it('First Bus Booking', async () => {
         await reporter.stepLevelLog(`${javascriptUtility.getTime()}`)

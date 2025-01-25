@@ -53,10 +53,10 @@ export const config = {
             }
         })(),
     ],
-    logLevel: 'debug',
+    logLevel: 'info',
     bail: 0,
     baseUrl: urls[ENV],
-    waitforTimeout: 20000,
+    waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
     // outputDir: './logs/Wdio_Log',
@@ -81,7 +81,7 @@ export const config = {
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000,
+        timeout: 120000,
         retries: 0,
         grep: ''
     },

@@ -5,16 +5,14 @@ class AllureReport {
     /**
      * @description This function is used to add step level log statment.
      * @param {String} Message
-     * @author Mugilan
      */
     async stepLevelLog(statment) {
         await allureReporter.addStep(statment)
     }
-    
+
     /**
      * @description This function is used to add testcase id 
      * @param {String} Test Case Id as Per TCM
-     * @author Mugilan
      */
     async addTestCaseId(testCaseID) {
         await allureReporter.addTestId(testCaseID)
@@ -23,7 +21,6 @@ class AllureReport {
     /**
      * @description This function is used to add feature name
      * @param {String} Feature Name of the test case
-     * @author Mugilan
      */
     async addFeatureName(featureName) {
         await allureReporter.addFeature(featureName)
@@ -31,9 +28,9 @@ class AllureReport {
 
     /**
      * @description This is used to add attachment in the report
-    */
-    async addAttachment(visibleText, content , type) {
-        await allureReporter.addAttachment(visibleText, content , type)
+     */
+    async addAttachment(visibleText, content, type) {
+        await allureReporter.addAttachment(visibleText, content, type)
     }
 
     /**
@@ -45,6 +42,16 @@ class AllureReport {
         await allureReporter.addLink(link, websiteName, 'website')
     }
 
+    /**
+     * @description This function is used to calculate the time of the action perform.
+     * @param {String} stepDescription The step name will displayed in the allure report
+     * @param {Function} action This is the action or actions to perform
+     */
+    async performStep(stepDescription, action) {
+        await allureReporter.startStep(stepDescription);
+        await action();
+        await allureReporter.endStep();
+    }
 }
 
 export default new AllureReport()
