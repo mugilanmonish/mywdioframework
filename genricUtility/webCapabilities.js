@@ -19,7 +19,7 @@ const chromeLocal = {
 
 const firefoxLocal = {
     browserName: 'firefox',
-    browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : 'latest',
+    browserVersion: process.env.BROWSER_VERSION !== null ? process.env.BROWSER_VERSION : '134',
     'moz:firefoxOptions': process.env.DOCKER === 'true' ? {
         args: ['-headless']
     } : {}

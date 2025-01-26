@@ -28,10 +28,10 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Install Firefox dependencies
-RUN wget -q "https://ftp.mozilla.org/pub/firefox/releases/latest/linux-x86_64/en-US/firefox.tar.bz2" && \
-    tar -xjf firefox.tar.bz2 -C /opt/ && \
-    ln -s /opt/firefox/firefox /usr/bin/firefox && \
-    rm firefox.tar.bz2
+RUN apt-get update && apt-get install -y \
+    firefox-esr \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Java 17 (OpenJDK)
 RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
