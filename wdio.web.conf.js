@@ -87,14 +87,16 @@ export const config = {
     },
 
     onPrepare: function (config, capabilities) {
-        const allureResultsDir = path.join(process.cwd(), 'allure-results');
-        fs.rm(allureResultsDir, { recursive: true, force: true }, (err) => {
-            if (err) {
-                console.error('Could not remove allure-results:', err);
-            } else {
-                console.log('Cleaned up allure-results directory');
-            }
-        });
+        if (process.env.DOCKER === 'false') {
+            const allureResultsDir = path.join(process.cwd(), 'allure-results');
+            fs.rm(allureResultsDir, { recursive: true, force: true }, (err) => {
+                if (err) {
+                    console.error('Could not remove allure-results:', err);
+                } else {
+                    console.log('Cleaned up allure-results directory');
+                }
+            });
+        }
     },
 
     beforeTest: async function (test, context) {
