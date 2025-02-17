@@ -9,8 +9,8 @@ describe('Make my trip', async () => {
             return depatureLabel.isClickable()
         })
         depatureLabel.click()
-        await $("//div[text()='December 2024']").waitForClickable({ timeout: 20000 })
-        const allPrice = await $$('//div[text()="December 2024"]/ancestor::div[@class="DayPicker-Month"]/descendant::p[@class=" todayPrice"]')
+        await $("//div[text()='January 2025']").waitForClickable({ timeout: 20000 })
+        const allPrice = await $$('//div[text()="January 2025"]/ancestor::div[@class="DayPicker-Month"]/descendant::p[@class=" todayPrice"]')
         const prices = []  
         for (const element of allPrice) {
             const ele = await (await element.getText()).replace(',', '')
@@ -26,7 +26,7 @@ describe('Make my trip', async () => {
         }
         lowerPrice = lowerPrice.toLocaleString()
         console.log(`Lower Price ${lowerPrice} --> ${typeof lowerPrice}`);
-        const lowerPriceDate = await $(`//div[text()='November 2024']/ancestor::div[@class='DayPicker-Month']//p[text()='${lowerPrice}']`)
-        lowerPriceDate.click()
+        const lowerPriceDate = await $(`//div[text()='January 2025']/ancestor::div[@class='DayPicker-Month']//p[text()='${lowerPrice}']`)
+        await lowerPriceDate.click()
     })
 })

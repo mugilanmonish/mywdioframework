@@ -1,3 +1,3 @@
 // config.js
-export const BS_USERNAME = 'ramasamypalanive_R8Ae1D';
-export const BS_ACCESS_KEY = 'yBLVF9BguNDNjfFNjUsV';
+export const BS_USERNAME = 'madheswarimaadhu_4al7Mf';
+export const BS_ACCESS_KEY = 'JwswozEyrf8bNqNudMF8';

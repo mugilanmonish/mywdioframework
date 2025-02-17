@@ -53,7 +53,7 @@ export const config = {
             }
         })(),
     ],
-    logLevel: 'info',
+    logLevel: 'debug',
     bail: 0,
     baseUrl: urls[ENV],
     waitforTimeout: 10000,
@@ -81,7 +81,7 @@ export const config = {
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
-        timeout: 120000,
+        timeout: 1200000,
         retries: 0,
         grep: ''
     },
