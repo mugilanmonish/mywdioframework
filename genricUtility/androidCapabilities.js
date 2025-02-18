@@ -8,8 +8,8 @@ async function setAppPath() {
     let apkPath = '';
     if (process.env.APP === 'anilab') {
         apkPath = path.resolve(process.cwd(), 'app/android/anilab.apk');
-    } else {
-        apkPath = path.resolve(process.cwd(), 'app/android/myntra.apk');
+    } else if (process.env.APP === 'hm') {
+        apkPath = path.resolve(process.cwd(), 'app/android/hm.apk');
     }
 
     if (process.env.BROWSERSTACK === 'true') {
