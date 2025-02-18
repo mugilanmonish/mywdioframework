@@ -2,6 +2,7 @@ node_modules/
 allure-results/
 Web_Execution_Report/
 MWeb_Execution_Report/
+Android_Execution_Report/
 logs/
 allure-report/
 Report/

@@ -1,12 +1,14 @@
 import axios from "axios";
+import fs from 'fs';
+import FormData from 'form-data';
 import report from "../genricUtility/allureUtility.js";
 import { BS_USERNAME, BS_ACCESS_KEY } from "../config.js";
 
 class ApiUtility {
 
-    async getBrowserstackPublicLink() {
+    async getBrowserstackPublicLink(executionType) {
         const sessionId = await browser.sessionId
-        const url = `https://api.browserstack.com/automate/sessions/${sessionId}.json`;
+        const url = `https://api.browserstack.com/${executionType}/sessions/${sessionId}.json`;
         try {
             const response = await axios.get(url, {
                 auth: {
@@ -27,6 +29,34 @@ class ApiUtility {
             return publicUrl
         } catch (error) {
             console.error('Error fetching the public URL:', error);
+        }
+    }
+
+    /**
+     * @description This function is used to upload the apk file in browserstack.
+     * @param {String} apkPath Based on the application name, We need to pass absolute path of the apk file
+     * @returns It will return the app url (e.g bs://8ac6119a2a87547e919022b993e12b4fcd50494f)
+     */
+    async uploadApk(apkPath) {
+        const apkFile = fs.createReadStream(apkPath);
+        const formData = new FormData();
+        formData.append('file', apkFile);
+    
+        try {
+            const response = await axios.post('https://api.browserstack.com/app-automate/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                auth: {
+                    username: BS_USERNAME,
+                    password: BS_ACCESS_KEY
+                },
+            });
+    
+            return response.data.app_url; // This will give the URL of the uploaded APK
+        } catch (error) {
+            console.error('Error uploading APK:', error.message);
+            throw new Error('Failed to upload APK to BrowserStack');
         }
     }
 }

@@ -53,7 +53,7 @@ export const config = {
             }
         })(),
     ],
-    logLevel: 'debug',
+    logLevel: 'info',
     bail: 0,
     baseUrl: urls[ENV],
     waitforTimeout: 10000,
@@ -87,7 +87,7 @@ export const config = {
     },
 
     onPrepare: function (config, capabilities) {
-        if (process.env.DOCKER === 'false') {
+        if (process.env.DOCKER === undefined ||  process.env.DOCKER === 'false') {
             const allureResultsDir = path.join(process.cwd(), 'allure-results');
             fs.rm(allureResultsDir, { recursive: true, force: true }, (err) => {
                 if (err) {
@@ -110,7 +110,7 @@ export const config = {
             await browser.takeScreenshot();
         }
         if (process.env.BROWSERSTACK === 'true') {
-            var publicUrl = await apiUtility.getBrowserstackPublicLink()
+            let publicUrl = await apiUtility.getBrowserstackPublicLink('automate')
             console.log(`BS Public Url -> ${publicUrl}`);
         }
         await browser.execute(() => {
