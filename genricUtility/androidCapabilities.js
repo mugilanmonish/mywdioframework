@@ -20,7 +20,7 @@ async function setAppPath() {
 }
 
 // Call the function before exporting
-await setAppPath();
+// await setAppPath();
 
 /**
  * @description This capability for local device and emulator
@@ -28,7 +28,9 @@ await setAppPath();
 const localDevice = {
     "platformName": "Android",
     "appium:automationName": "UiAutomator2",
-    'appium:app': appPath,
+    // 'appium:app': appPath,
+    'appium:appPackage': 'com.redbubble',
+    'appium:appActivity': 'com.redbubble.ui.MainActivity',
     "appium:autoGrantPermissions": true,
     "appium:noReset": true,
     "appium:fullReset": false

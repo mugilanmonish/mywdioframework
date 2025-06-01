@@ -7,6 +7,10 @@ class AppiumUtitlity {
     async swipe() {
         
     }
+
+    async scroll() {
+        
+    }
 } 
 
 export default new AppiumUtitlity();
