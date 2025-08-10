@@ -1,16 +1,22 @@
 import { BS_USERNAME, BS_ACCESS_KEY } from './../config.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const chromeLocal = {
     platformName: 'Android',
     browserName: 'Chrome',
     'appium:automationName': 'UiAutomator2',
-    'appium:chromedriverAutodownload': true,
+    'appium:chromedriverExecutable': path.resolve(__dirname, './driver/chromedriver.exe'),
     'appium:noReset': true,
     'appium:fullReset': false
 }
 
 const safariLocal = {
-    
+
 }
 
 const chromeBrowserstack = {

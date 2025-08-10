@@ -4,6 +4,7 @@ import allure from 'allure-commandline';
 import mwebCapabilities from "./genricUtility/mwebCapabilities.js";
 import apiUtility from './genricUtility/apiUtility.js';
 import { BS_USERNAME, BS_ACCESS_KEY } from "./config.js";
+import { setupChromedriver } from './genricUtility/getMwebChromedriver.js';
 const selectedBrowser = process.env.BROWSER_NAME || 'chrome'
 const ENV = process.env.ENV || 'prod';
 const urls = {
@@ -11,6 +12,7 @@ const urls = {
     qa: 'http://localhost:4050',
     prod: 'https://www.redbus.in/'
 };
+let chromeDriverPath;
 if (!urls[ENV]) {
     throw new Error(`Environment ${ENV} is not defined. Please use 'dev', 'qa', or 'prod'.`);
 }
@@ -88,7 +90,7 @@ export const config = {
         retries: 0,
         grep: ''
     },
-    onPrepare: function (config, capabilities) {
+    onPrepare: async function (config, capabilities) {
         const allureResultsDir = path.join(process.cwd(), 'allure-results');
         fs.rm(allureResultsDir, { recursive: true, force: true }, (err) => {
             if (err) {
@@ -97,8 +99,9 @@ export const config = {
                 console.log('Cleaned up allure-results directory');
             }
         });
+        chromeDriverPath = await setupChromedriver();
     },
-   
+
     beforeTest: async function (test, context) {
         if (process.env.BROWSER_NAME === 'safari') {
             const contexts = await browser.getContexts(); // Explicitly type contexts as string[]
@@ -126,7 +129,7 @@ export const config = {
         //     await browser.pause(10000)
         // }
     },
- 
+
     afterTest: async function (test, context, { error, result, duration, passed, retries }) {
         if (process.env.BROWSERSTACK === 'true') {
             var publicUrl = await apiUtility.getBrowserstackPublicLink()
